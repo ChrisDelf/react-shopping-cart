@@ -21,8 +21,9 @@ console.log(historyData)
       'Cart',
       JSON.stringify([...cart, item])
     );  };
-  const removeButton = index => {
-		cart.splice(index, 1);
+	const removeButton = index => {
+		let y = index-1
+		cart.splice(y, 1);
 		console.log(cart)
 		setCart([...cart])
 localStorage.setItem(
