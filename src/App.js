@@ -7,8 +7,7 @@ import Navigation from './components/Navigation';
 import Products from './components/Products';
 import ShoppingCart from './components/ShoppingCart';
 import { ProductContext } from './context/ProductContext';
-import {CartContext} from './context/CartContext';
-
+import { CartContext } from './context/CartContext';
 
 function App() {
   const [products] = useState(data);
@@ -17,20 +16,26 @@ function App() {
   const addItem = item => {
     setCart([...cart, item]);
   };
+  const removeButton = index => {
+		cart.splice(index, 1);
+		console.log(cart)
+		setCart([...cart])
 
-	return (
-		<CartContext.Provider value = {cart}>
-    <ProductContext.Provider value={{ products, addItem }}>
-      <div className="App">
-        <Navigation cart={cart} />
+  };
 
-        {/* Routes */}
-        <Route exact path="/" component={Products} />
+  return (
+    <CartContext.Provider value={{ cart, removeButton }}>
+      <ProductContext.Provider value={{ products, addItem }}>
+        <div className="App">
+          <Navigation cart={cart} />
 
-        <Route path="/cart" component={ShoppingCart}/>
-      </div>
-		</ProductContext.Provider>
-		</CartContext.Provider>
+          {/* Routes */}
+          <Route exact path="/" component={Products} />
+
+          <Route path="/cart" component={ShoppingCart} />
+        </div>
+      </ProductContext.Provider>
+    </CartContext.Provider>
   );
 }
 
