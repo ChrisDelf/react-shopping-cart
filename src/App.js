@@ -10,26 +10,21 @@ import { ProductContext } from './context/ProductContext';
 import { CartContext } from './context/CartContext';
 
 function App() {
-  const historyData =(JSON.parse(localStorage.getItem('Cart') || ''))
+  const historyData = JSON.parse(localStorage.getItem('Cart') || '');
   const [products] = useState(data);
-	const [cart, setCart] = useState(historyData);
-console.log(historyData)
+  const [cart, setCart] = useState(historyData);
+  console.log(historyData);
 
   const addItem = item => {
-		setCart([...cart, item]);
-		localStorage.setItem(
-      'Cart',
-      JSON.stringify([...cart, item])
-    );  };
-	const removeButton = index => {
-		let y = index-1
-		cart.splice(y, 1);
-		console.log(cart)
-		setCart([...cart])
-localStorage.setItem(
-      'Cart',
-      JSON.stringify([...cart])
-    );
+    setCart([...cart, item]);
+    localStorage.setItem('Cart', JSON.stringify([...cart, item]));
+  };
+  const removeButton = index => {
+    let newCart = [...cart];
+    newCart.splice(index, 1);
+
+    setCart(newCart);
+    localStorage.setItem('Cart', JSON.stringify(newCart));
   };
 
   return (
