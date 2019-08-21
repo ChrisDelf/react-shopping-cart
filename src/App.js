@@ -10,12 +10,10 @@ import { ProductContext } from './context/ProductContext';
 import { CartContext } from './context/CartContext';
 
 function App() {
-  const historyData = JSON.parse(localStorage.getItem('Cart') || '');
-  const [products] = useState(data);
-  const [cart, setCart] = useState(historyData);
-  console.log(historyData);
 
-  const addItem = item => {
+  const [products] = useState(data);
+  const [cart, setCart] = useState(JSON.parse(localStorage.getItem('Cart')) || []);
+   const addItem = item => {
     setCart([...cart, item]);
     localStorage.setItem('Cart', JSON.stringify([...cart, item]));
   };
